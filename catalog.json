@@ -23,7 +23,7 @@
       "title": "Dashboard เรื่องร้องเรียน Traffy Fondue (5 ปี · Insight)",
       "type": "dashboard",
       "file": "dashboards/traffy-complaints-dashboard.html",
-      "desc": "ครบ 361,438 เรื่อง + เครื่องมือหา insight: ข้อสังเกตอัตโนมัติ, ชนิดปัญหาละเอียด, มัธยฐานเวลาแก้/งานค้าง, histogram, heatmap วัน×ชั่วโมง + เขต×ปี, แผนที่ 4 โหมด (heatmap/ฟองเขต/จุดซ้ำ), export CSV · ~67MB เปิดบนคอม",
+      "desc": "ครบ 1,105,119 เรื่อง ทุกประเภท + เครื่องมือหา insight: ข้อสังเกตอัตโนมัติ, ชนิดปัญหาละเอียด, มัธยฐานเวลาแก้/งานค้าง, histogram, heatmap วัน×ชั่วโมง + เขต×ปี, แผนที่ 4 โหมด (heatmap/ฟองเขต/จุดซ้ำ), export CSV · ~78MB เปิดบนคอม",
       "updated": "2026-06-20",
       "tags": [
         "traffy",
