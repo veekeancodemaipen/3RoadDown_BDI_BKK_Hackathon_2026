@@ -20,15 +20,17 @@
     },
     {
       "id": "traffy-complaints-dashboard",
-      "title": "Dashboard เรื่องร้องเรียน Traffy Fondue",
+      "title": "Dashboard เรื่องร้องเรียน Traffy Fondue (5 ปี)",
       "type": "dashboard",
       "file": "dashboards/traffy-complaints-dashboard.html",
-      "desc": "สรุปเรื่องร้องเรียน Traffy Fondue แบบกราฟอินเทอแอกทีฟ — สัดส่วนประเภท, เขต, สถานะการแก้ไข",
+      "desc": "ข้อมูลครบ 5 ปี (2565–2569) ~361,000 เรื่อง ฝังในไฟล์โหลดเร็ว — KPI, โดนัทประเภท, เขต, ชั่วโมง, เทรนด์รายเดือน, แผนที่ + ฟิลเตอร์ ปี/ประเภท/เขต/สถานะ/ค้นหา",
       "updated": "2026-06-19",
       "tags": [
         "traffy",
         "complaints",
-        "overview"
+        "5y",
+        "interactive",
+        "map"
       ]
     },
     {
