@@ -1,0 +1,62 @@
+{
+  "project": "3 Road Down — BDI BKK Hackathon 2026",
+  "subtitle": "SafePath BKK × AroundBangkok · Data for better Journey Research",
+  "updated": "2026-06-19",
+  "note": "พื้นที่กลางรวม dashboard และกราฟที่ประมวลผลแล้ว สำหรับทีมเข้ามาดู/ดึงไปใช้",
+  "items": [
+    {
+      "id": "traffy-5y-dashboard",
+      "title": "Traffy Fondue — Dashboard 5 ปี (2565–2569)",
+      "type": "dashboard",
+      "file": "dashboards/traffy-5y-dashboard.html",
+      "desc": "ภาพรวมเรื่องร้องเรียนกลุ่มการเดินทาง/ทางเท้า กรุงเทพฯ ย้อนหลัง 5 ปี — เทรนด์รายปี, แยกประเภท, แยกเขต",
+      "updated": "2026-06-19",
+      "tags": ["traffy", "mobility", "5y", "trend"]
+    },
+    {
+      "id": "traffy-complaints-dashboard",
+      "title": "Dashboard เรื่องร้องเรียน Traffy Fondue",
+      "type": "dashboard",
+      "file": "dashboards/traffy-complaints-dashboard.html",
+      "desc": "สรุปเรื่องร้องเรียน Traffy Fondue แบบกราฟอินเทอแอกทีฟ — สัดส่วนประเภท, เขต, สถานะการแก้ไข",
+      "updated": "2026-06-19",
+      "tags": ["traffy", "complaints", "overview"]
+    },
+    {
+      "id": "traffy-rawdata-table",
+      "title": "ตารางข้อมูลดิบ Traffy (ปี 2569)",
+      "type": "dashboard",
+      "file": "dashboards/traffy-rawdata-table.html",
+      "desc": "ตารางข้อมูลดิบรายเคส กลุ่มการเดินทาง/ทางเท้า ปี 2569 — ค้นหา/กรอง/เรียงในหน้าได้ (ไฟล์ใหญ่ ~12MB)",
+      "updated": "2026-06-19",
+      "tags": ["traffy", "raw", "table", "2569"]
+    },
+    {
+      "id": "traffy-by-group",
+      "title": "กราฟ: เรื่องร้องเรียนแยกตามกลุ่มประเภท",
+      "type": "chart",
+      "file": "charts/traffy-by-group.png",
+      "desc": "สัดส่วน/จำนวนเรื่องร้องเรียน Traffy แยกตามกลุ่มประเภทปัญหา",
+      "updated": "2026-06-19",
+      "tags": ["traffy", "group", "png"]
+    },
+    {
+      "id": "traffy-top-districts",
+      "title": "กราฟ: เขตที่มีเรื่องร้องเรียนสูงสุด",
+      "type": "chart",
+      "file": "charts/traffy-top-districts.png",
+      "desc": "อันดับเขตในกรุงเทพฯ ที่มีเรื่องร้องเรียนกลุ่มการเดินทางมากที่สุด",
+      "updated": "2026-06-19",
+      "tags": ["traffy", "district", "ranking", "png"]
+    },
+    {
+      "id": "project-overview",
+      "title": "แผนภาพรวมโปรเจกต์ SafePath × AroundBangkok",
+      "type": "chart",
+      "file": "charts/project-overview.png",
+      "desc": "ไดอะแกรมภาพรวมแนวคิดและการเชื่อมข้อมูลของสองทีม",
+      "updated": "2026-06-18",
+      "tags": ["concept", "diagram", "png"]
+    }
+  ]
+}

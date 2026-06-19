@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3 Road Down — Data Hub (BDI BKK Hackathon 2026)</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#fff; --ink:#1c2127; --muted:#5b6573;
+    --line:#e3e7ec; --accent:#1f6feb; --accent-soft:#e8f0fe;
+    --chip:#eef1f5; --chart:#0a7d52; --chart-soft:#e4f5ee;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans Thai",sans-serif;
+    line-height:1.5}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 20px 60px}
+  header h1{margin:0 0 4px;font-size:1.5rem}
+  header .sub{color:var(--muted);font-size:.95rem}
+  header .note{color:var(--muted);font-size:.85rem;margin-top:8px}
+  .meta{color:var(--muted);font-size:.8rem;margin-top:6px}
+  .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 18px}
+  #q{flex:1;min-width:200px;padding:9px 12px;border:1px solid var(--line);
+    border-radius:8px;font-size:.95rem;background:#fff}
+  .filters{display:flex;gap:6px;flex-wrap:wrap}
+  .filters button{padding:7px 13px;border:1px solid var(--line);background:#fff;
+    border-radius:20px;cursor:pointer;font-size:.85rem;color:var(--muted)}
+  .filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    overflow:hidden;display:flex;flex-direction:column}
+  .thumb{background:var(--chip);border-bottom:1px solid var(--line);
+    aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:contain}
+  .thumb.ph{font-size:2.2rem}
+  .body{padding:14px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .badge{display:inline-block;font-size:.7rem;font-weight:600;padding:3px 9px;
+    border-radius:6px;width:fit-content;letter-spacing:.02em}
+  .badge.dashboard{background:var(--accent-soft);color:var(--accent)}
+  .badge.chart{background:var(--chart-soft);color:var(--chart)}
+  .card h3{margin:0;font-size:1.02rem;line-height:1.35}
+  .card p{margin:0;color:var(--muted);font-size:.86rem}
+  .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}
+  .tag{background:var(--chip);color:var(--muted);font-size:.7rem;padding:2px 8px;border-radius:10px}
+  .actions{display:flex;gap:8px;margin-top:auto;padding-top:6px}
+  .btn{flex:1;text-align:center;text-decoration:none;font-size:.85rem;font-weight:600;
+    padding:8px 10px;border-radius:8px;cursor:pointer;border:1px solid var(--line)}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.ghost{background:#fff;color:var(--ink)}
+  .updated{font-size:.72rem;color:var(--muted)}
+  .empty{text-align:center;color:var(--muted);padding:50px 0}
+  footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:.82rem}
+  footer code{background:var(--chip);padding:2px 6px;border-radius:5px;font-size:.8rem}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="title">Data Hub</h1>
+    <div class="sub" id="subtitle"></div>
+    <div class="note" id="note"></div>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="ค้นหา… (ชื่อ, คำอธิบาย, แท็ก)" />
+    <div class="filters" id="filters">
+      <button data-f="all" class="on">ทั้งหมด</button>
+      <button data-f="dashboard">Dashboard</button>
+      <button data-f="chart">กราฟ (PNG)</button>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" style="display:none">ไม่พบรายการที่ตรงกับการค้นหา</div>
+
+  <footer>
+    <p><strong>วิธีเพิ่มของใหม่ (รองรับการสเกล):</strong> วางไฟล์ใน <code>dashboards/</code> หรือ <code>charts/</code>
+    แล้วเพิ่ม 1 บล็อกใน <code>catalog.json</code> — หน้านี้จะแสดงให้อัตโนมัติ ไม่ต้องแก้ HTML</p>
+    <p id="repo"></p>
+  </footer>
+</div>
+
+<script>
+const TYPE_LABEL = { dashboard: "Dashboard", chart: "กราฟ (PNG)" };
+let DATA = [], filter = "all", query = "";
+
+fetch("catalog.json?_=" + Date.now())
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById("title").textContent = d.project || "Data Hub";
+    document.getElementById("subtitle").textContent = d.subtitle || "";
+    document.getElementById("note").textContent = d.note || "";
+    DATA = d.items || [];
+    const nd = DATA.filter(x=>x.type==="dashboard").length;
+    const nc = DATA.filter(x=>x.type==="chart").length;
+    document.getElementById("meta").textContent =
+      `อัปเดต ${d.updated || "-"} · ${nd} dashboards · ${nc} กราฟ · รวม ${DATA.length} รายการ`;
+    document.getElementById("repo").innerHTML =
+      'Repo: <a href="https://github.com/veekeancodemaipen/3RoadDown_BDI_BKK_Hackathon_2026">github.com/veekeancodemaipen/3RoadDown_BDI_BKK_Hackathon_2026</a>';
+    render();
+  })
+  .catch(e => {
+    document.getElementById("grid").innerHTML =
+      '<div class="empty">โหลด catalog.json ไม่ได้ — เปิดผ่านลิงก์ GitHub Pages หรือเซิร์ฟเวอร์ (ไม่ใช่ดับเบิลคลิกไฟล์)</div>';
+  });
+
+function fileName(p){ return p.split("/").pop(); }
+
+function render(){
+  const grid = document.getElementById("grid");
+  const q = query.trim().toLowerCase();
+  const items = DATA.filter(it => {
+    if (filter !== "all" && it.type !== filter) return false;
+    if (!q) return true;
+    const hay = [it.title, it.desc, (it.tags||[]).join(" ")].join(" ").toLowerCase();
+    return hay.includes(q);
+  });
+  document.getElementById("empty").style.display = items.length ? "none" : "block";
+  grid.innerHTML = items.map(it => {
+    const isChart = it.type === "chart";
+    const thumb = isChart
+      ? `<div class="thumb"><img loading="lazy" src="${it.file}" alt="${it.title}"></div>`
+      : `<div class="thumb ph">📊</div>`;
+    const tags = (it.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join("");
+    const actions = isChart
+      ? `<a class="btn ghost" href="${it.file}" target="_blank" rel="noopener">ดูเต็ม</a>
+         <a class="btn primary" href="${it.file}" download="${fileName(it.file)}">⬇ PNG</a>`
+      : `<a class="btn primary" href="${it.file}" target="_blank" rel="noopener">เปิด ↗</a>`;
+    return `<div class="card">
+      ${thumb}
+      <div class="body">
+        <span class="badge ${it.type}">${TYPE_LABEL[it.type]||it.type}</span>
+        <h3>${it.title}</h3>
+        <p>${it.desc||""}</p>
+        <div class="tags">${tags}</div>
+        <div class="actions">${actions}</div>
+        <div class="updated">อัปเดต ${it.updated||"-"}</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+document.getElementById("q").addEventListener("input", e => { query = e.target.value; render(); });
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if(!b) return;
+  filter = b.dataset.f;
+  [...document.querySelectorAll("#filters button")].forEach(x=>x.classList.toggle("on", x===b));
+  render();
+});
+</script>
+</body>
+</html>
