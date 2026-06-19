@@ -1,7 +1,7 @@
 {
   "project": "3 Road Down — BDI BKK Hackathon 2026",
   "subtitle": "SafePath BKK × AroundBangkok × Tor Sai · Data for better Journey Research",
-  "updated": "2026-06-19",
+  "updated": "2026-06-20",
   "note": "พื้นที่กลางรวม dashboard และกราฟที่ประมวลผลแล้ว สำหรับทีมเข้ามาดู/ดึงไปใช้",
   "items": [
     {
@@ -9,8 +9,8 @@
       "title": "Traffy Fondue — Dashboard 5 ปี (2565–2569)",
       "type": "dashboard",
       "file": "dashboards/traffy-5y-dashboard.html",
-      "desc": "ภาพรวมเรื่องร้องเรียนกลุ่มการเดินทาง/ทางเท้า กรุงเทพฯ ย้อนหลัง 5 ปี — เทรนด์รายปี, แยกประเภท, แยกเขต",
-      "updated": "2026-06-19",
+      "desc": "ภาพรวมเรื่องร้องเรียน Traffy Fondue กรุงเทพฯ ย้อนหลัง 5 ปี ครบทุกประเภท 1,105,119 เรื่อง — เทรนด์รายปี, แยกประเภท, แยกเขต",
+      "updated": "2026-06-20",
       "tags": [
         "traffy",
         "mobility",
@@ -24,7 +24,7 @@
       "type": "dashboard",
       "file": "dashboards/traffy-complaints-dashboard.html",
       "desc": "ครบ 361,438 เรื่อง + เครื่องมือหา insight: ข้อสังเกตอัตโนมัติ, ชนิดปัญหาละเอียด, มัธยฐานเวลาแก้/งานค้าง, histogram, heatmap วัน×ชั่วโมง + เขต×ปี, แผนที่ 4 โหมด (heatmap/ฟองเขต/จุดซ้ำ), export CSV · ~67MB เปิดบนคอม",
-      "updated": "2026-06-19",
+      "updated": "2026-06-20",
       "tags": [
         "traffy",
         "complaints",
@@ -41,7 +41,7 @@
       "type": "chart",
       "file": "charts/traffy-by-group.png",
       "desc": "สัดส่วน/จำนวนเรื่องร้องเรียน Traffy แยกตามกลุ่มประเภทปัญหา",
-      "updated": "2026-06-19",
+      "updated": "2026-06-20",
       "tags": [
         "traffy",
         "group",
@@ -54,7 +54,7 @@
       "type": "chart",
       "file": "charts/traffy-top-districts.png",
       "desc": "อันดับเขตในกรุงเทพฯ ที่มีเรื่องร้องเรียนกลุ่มการเดินทางมากที่สุด",
-      "updated": "2026-06-19",
+      "updated": "2026-06-20",
       "tags": [
         "traffy",
         "district",
